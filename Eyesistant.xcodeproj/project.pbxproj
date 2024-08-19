@@ -56,15 +56,55 @@
 		5F8A62572C732894007B171A /* Eyesistant */ = {
 			isa = PBXGroup;
 			children = (
+				5F8A626F2C732931007B171A /* Extension */,
+				5F8A626E2C73292C007B171A /* Models */,
+				5F8A626D2C732923007B171A /* ViewModels */,
+				5F8A626C2C732915007B171A /* Views */,
 				5F8A62582C732894007B171A /* AppDelegate.swift */,
 				5F8A625A2C732894007B171A /* SceneDelegate.swift */,
-				5F8A625C2C732894007B171A /* ViewController.swift */,
 				5F8A625E2C732894007B171A /* Main.storyboard */,
 				5F8A62612C732895007B171A /* Assets.xcassets */,
 				5F8A62632C732895007B171A /* LaunchScreen.storyboard */,
 				5F8A62662C732895007B171A /* Info.plist */,
 			);
 			path = Eyesistant;
+			sourceTree = "<group>";
+		};
+		5F8A626C2C732915007B171A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5F8A625C2C732894007B171A /* ViewController.swift */,
+				5F8A62702C732939007B171A /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F8A626D2C732923007B171A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5F8A626E2C73292C007B171A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5F8A626F2C732931007B171A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		5F8A62702C732939007B171A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
