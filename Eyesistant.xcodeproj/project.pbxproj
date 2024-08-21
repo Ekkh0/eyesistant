@@ -13,6 +13,11 @@
 		5F8A62602C732894007B171A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A625F2C732894007B171A /* Base */; };
 		5F8A62622C732895007B171A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A62612C732895007B171A /* Assets.xcassets */; };
 		5F8A62652C732895007B171A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A62642C732895007B171A /* Base */; };
+		5F8A62722C732F64007B171A /* SkinToneDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62712C732F64007B171A /* SkinToneDetection.swift */; };
+		5F8A62752C733602007B171A /* SkinToneDetectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62742C733602007B171A /* SkinToneDetectorView.swift */; };
+		5F8A62772C73360B007B171A /* SkinToneDetector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A62762C73360B007B171A /* SkinToneDetector.storyboard */; };
+		5F8A62792C7339C7007B171A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62782C7339C7007B171A /* Color.swift */; };
+		5F8A627D2C748D41007B171A /* RecommendationColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A627C2C748D41007B171A /* RecommendationColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		5F8A62612C732895007B171A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F8A62642C732895007B171A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F8A62662C732895007B171A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F8A62712C732F64007B171A /* SkinToneDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinToneDetection.swift; sourceTree = "<group>"; };
+		5F8A62742C733602007B171A /* SkinToneDetectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinToneDetectorView.swift; sourceTree = "<group>"; };
+		5F8A62762C73360B007B171A /* SkinToneDetector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SkinToneDetector.storyboard; sourceTree = "<group>"; };
+		5F8A62782C7339C7007B171A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		5F8A627C2C748D41007B171A /* RecommendationColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,7 @@
 		5F8A626C2C732915007B171A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5F8A62732C7335F0007B171A /* SkinToneDetectorView */,
 				5F8A625C2C732894007B171A /* ViewController.swift */,
 				5F8A62702C732939007B171A /* Components */,
 			);
@@ -82,6 +93,7 @@
 		5F8A626D2C732923007B171A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5F8A62712C732F64007B171A /* SkinToneDetection.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -89,6 +101,7 @@
 		5F8A626E2C73292C007B171A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5F8A627C2C748D41007B171A /* RecommendationColors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -96,6 +109,7 @@
 		5F8A626F2C732931007B171A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5F8A62782C7339C7007B171A /* Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -105,6 +119,15 @@
 			children = (
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		5F8A62732C7335F0007B171A /* SkinToneDetectorView */ = {
+			isa = PBXGroup;
+			children = (
+				5F8A62742C733602007B171A /* SkinToneDetectorView.swift */,
+				5F8A62762C73360B007B171A /* SkinToneDetector.storyboard */,
+			);
+			path = SkinToneDetectorView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F8A62622C732895007B171A /* Assets.xcassets in Resources */,
+				5F8A62772C73360B007B171A /* SkinToneDetector.storyboard in Resources */,
 				5F8A62652C732895007B171A /* Base in Resources */,
 				5F8A62602C732894007B171A /* Base in Resources */,
 			);
@@ -178,9 +202,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F8A62722C732F64007B171A /* SkinToneDetection.swift in Sources */,
 				5F8A625D2C732894007B171A /* ViewController.swift in Sources */,
 				5F8A62592C732894007B171A /* AppDelegate.swift in Sources */,
+				5F8A62752C733602007B171A /* SkinToneDetectorView.swift in Sources */,
 				5F8A625B2C732894007B171A /* SceneDelegate.swift in Sources */,
+				5F8A627D2C748D41007B171A /* RecommendationColors.swift in Sources */,
+				5F8A62792C7339C7007B171A /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,11 +363,11 @@
 				DEVELOPMENT_TEAM = RHGD2V8746;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Eyesistant/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,11 +391,11 @@
 				DEVELOPMENT_TEAM = RHGD2V8746;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Eyesistant/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
