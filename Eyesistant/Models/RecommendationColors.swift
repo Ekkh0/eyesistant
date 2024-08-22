@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Feelings: String{
+enum RecommendationColors: String{
     case summer, spring, autumn, winter
     
     var colorHexes: [UIColor] {
@@ -21,6 +21,19 @@ enum Feelings: String{
             return [.fieryRed, .deepRustBrown, .burntSienna, .oliveGreen, .darkGrayBrown, .darkTeal, .darkSlatePurple, .raspberryRed, .warmClay, .crimsonRed, .harvestGold, .deepBrickRed, .dustySage, .richAquamarine, .stormyBlueGreen, .warmTaupe, .darkOliveGray, .charcoalPlum, .darkEspresso, .darkCocoa, .earthyBrown]
         case .spring:
             return [.burntOrangeRed, .hotPinkRed, .vividRedOrange, .deepEmeraldGreen, .deepAqua, .slateBlue, .darkMulberry, .rosewood, .peachyBeige, .paleButterscotch, .spicyOrange, .sunshineYellow, .limeGreen, .vividCyan, .dustyLavender, .sandyBeige, .mutedGray, .darkNavyBlue, .deepCocoa, .richMahogany, .warmKhaki]
+        }
+    }
+    
+    var colortitle: [String] {
+        switch self{
+        case .winter:
+            return ["Energetic Pink", "Luxurious Plum", "Rosy Pink", "Bright Zesty Yellow", "Deep Forest Green", "Classic Navy Blue", "Regal Purple", "Royal Violet", "Dark Plum", "Dark Chestnut", "Medium Teal", "Soft Pastel Green", "Vivid Oceanic Blue", "Soft Serene Pastel Blue", "Delicate Lavender Purple", "Sage Green", "Ebony", "Deep Navy Blue", "Charcoal Gray", "Mid Tone Gray"]
+        case .summer:
+            return ["Pastel Magenta", "Pale Orchid", "Soft Muted Lavender", "Rich Vibrant Red", "Pale Olive", "Teal Blue", "Soft Pastel Blue", "Slate Blue", "Amethyst Purple", "Dusty Rose", "Muted Rose", "Bright Teal", "Steel Blue", "Pale Azure", "Deep Magenta", "Dark Eggplant", "Soft Olive Gray", "Charcoal Brown", "Midnight Blue", "Dark Mauve", "Tan Brown"]
+        case .autumn:
+            return ["Fiery Red", "Deep Rust Brown", "Burnt Sienna", "Olive Green", "Dark Gray Brown", "Dark Teal", "Dark Slate Purple", "Raspberry Red", "Warm Clay", "Crimson Red", "Harvest Gold", "Deep Brick Red", "Dusty Sage", "Rich Aquamarine", "Stormy Blue Green", "Warm Taupe", "Dark Olive Gray", "Charcoal Plum", "Dark Espresso", "Dark Cocoa", "Earthy Brown"]
+        case .spring:
+            return ["Burnt Orange Red", "Hot Pink Red", "Vivid Red Orange", "Deep Emerald Green", "Deep Aqua", "Slate Blue", "Dark Mulberry", "Rosewood", "Peachy Beige", "Pale Butterscotch", "Spicy Orange", "Sunshine Yellow", "Lime Green", "Vivid Cyan", "Dusty Lavender", "Sandy Beige", "Muted Gray", "Dark Navy Blue", "Deep Cocoa", "Rich Mahogany", "Warm Khaki"]
         }
     }
     

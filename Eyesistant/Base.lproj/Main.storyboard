@@ -41,7 +41,7 @@
         <!--SkinToneDetection-->
         <scene sceneID="QWn-fe-UAF">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SkinToneDetectorViewController" storyboardName="SkinToneDetector" referencedIdentifier="SkinToneDetectorViewController" id="raB-nL-c6z" userLabel="SkinToneDetection" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="MainView" storyboardName="MainView" referencedIdentifier="MainView" id="raB-nL-c6z" userLabel="SkinToneDetection" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Bia-Ze-hbm"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSL-6K-fBT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

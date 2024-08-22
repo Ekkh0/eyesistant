@@ -74,7 +74,7 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up the capture session
+//         Set up the capture session
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .hd4K3840x2160
         
@@ -101,8 +101,6 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         overlayHint.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
         overlayHint.layer.zPosition = 3
         self.view.addSubview(overlayHint)
-        let overlayHintContainer = UIView(frame: CGRect(x: (self.view.frame.width - 350) / 2, y: (self.view.frame.height-300) / 2, width: 350, height: 300))
-        overlayHint.addSubview(overlayHintContainer)
         
         let hint = UIStackView()
         hint.axis = .vertical
@@ -110,10 +108,11 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         hint.translatesAutoresizingMaskIntoConstraints = false
         hint.alignment = .center
         hint.distribution = .equalSpacing
-        overlayHintContainer.addSubview(hint)
+        overlayHint.addSubview(hint)
         
         NSLayoutConstraint.activate([
-            hint.centerYAnchor.constraint(equalTo: overlayHintContainer.centerYAnchor),
+            hint.centerXAnchor.constraint(equalTo: overlayHint.centerXAnchor),
+            hint.centerYAnchor.constraint(equalTo: overlayHint.centerYAnchor),
         ])
         
         for num in [1, 2, 3]{
@@ -170,13 +169,13 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         }
         
         // Add the image view
-        let imageView = UIImageView(image: UIImage(systemName: "trash"))
+        let imageView = UIImageView(image: UIImage(named: "hintBird"))
         imageView.contentMode = .scaleAspectFit
         hint.addArrangedSubview(imageView)
         
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 120), // Adjust as needed
-            imageView.heightAnchor.constraint(equalToConstant: 100), // Adjust as needed
+            imageView.widthAnchor.constraint(equalToConstant: 220), // Adjust as needed
+            imageView.heightAnchor.constraint(equalToConstant: 220), // Adjust as needed
         ])
         
         // Add the button
@@ -246,7 +245,7 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         } catch {
             print("Error saving image: \(error)")
         }
-        defaults.set(relativePath, forKey: "path")
+        defaults.set(relativePath, forKey: "userImagePath")
         defaults.synchronize()
         
         print(skinToneDetection.detectSkinTone(in: savedImage!))
@@ -362,11 +361,11 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         notice.spacing = 30
         
         if error{
-            let image = UIImageView(image: UIImage(systemName: "trash"))
+            let image = UIImageView(image: UIImage(named: "noticeBird"))
             image.contentMode = .scaleAspectFit
             NSLayoutConstraint.activate([
-                image.widthAnchor.constraint(equalToConstant: 150), // Adjust as needed
-                image.heightAnchor.constraint(equalToConstant: 150), // Adjust as needed
+                image.widthAnchor.constraint(equalToConstant: 220), // Adjust as needed
+                image.heightAnchor.constraint(equalToConstant: 220), // Adjust as needed
             ])
             
             notice.addArrangedSubview(image)
@@ -385,15 +384,9 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
             notice.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
         
-        if error{
-            NSLayoutConstraint.activate([
-                notice.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            ])
-        }else{
-            NSLayoutConstraint.activate([
-                notice.bottomAnchor.constraint(equalTo: captureButton.topAnchor, constant: -20),
-            ])
-        }
+        NSLayoutConstraint.activate([
+            notice.bottomAnchor.constraint(equalTo: captureButton.topAnchor, constant: -20),
+        ])
     }
     
     func setupCamera(position: AVCaptureDevice.Position) {

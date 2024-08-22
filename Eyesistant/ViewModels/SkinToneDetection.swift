@@ -299,7 +299,7 @@ class SkinToneDetection: ObservableObject {
             try requestHandler.perform([faceDetectionRequest])
             
             // Check if any faces were detected
-            if let results = faceDetectionRequest.results as? [VNFaceObservation] {
+            if let results = faceDetectionRequest.results {
                 return !results.isEmpty
             } else {
                 return false
