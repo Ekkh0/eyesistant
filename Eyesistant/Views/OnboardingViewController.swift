@@ -7,17 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    @IBOutlet var NavigateButton:UIButton!
+class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func navigateToNewPage(_ sender:UIButton){
-        performSegue(withIdentifier: "goToNewPage", sender: self)
+    @IBAction func navigateToDetector(_ sender:UIButton){
+        performSegue(withIdentifier: "goToDetector", sender: self)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

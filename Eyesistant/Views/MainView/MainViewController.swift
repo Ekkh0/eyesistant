@@ -151,7 +151,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
         
         if currentCamera == .back{
-            if let filteredImage = mainViewModel.applyChromaKeyFilter(to: ciImage, targetRed: selectedColor!.redValue, targetGreen: selectedColor!.greenValue, targetBlue: selectedColor!.greenValue, tolerance: 0.2) {
+            if let filteredImage = mainViewModel.applyChromaKeyFilter(to: ciImage, targetRed: selectedColor!.redValue, targetGreen: selectedColor!.greenValue, targetBlue: selectedColor!.blueValue, tolerance: 0.3) {
                 // Convert the composited CIImage to CGImage and then UIImage
                 if let cgImage = context.createCGImage(filteredImage, from: filteredImage.extent) {
                     let uiImage = UIImage(cgImage: cgImage)

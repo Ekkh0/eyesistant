@@ -73,7 +73,7 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UserDefaults.standard.removeObject(forKey: "personalColor")
 //         Set up the capture session
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .hd4K3840x2160
@@ -249,8 +249,31 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         defaults.synchronize()
         
         print(skinToneDetection.detectSkinTone(in: savedImage!))
-        //        performSegue(withIdentifier: "", sender: self)
+        performSegue(withIdentifier: "goToResult", sender: self)
     }
+    
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "goToResult"{
+                var selectedSeason: Season!
+                let seasons = SeasonSeeder.seed()
+            switch skinToneDetection.detectSkinTone(in: savedImage!){
+            case 1:
+                selectedSeason = seasons.first { $0.seasonName == "Spring" }!
+            case 2:
+                selectedSeason = seasons.first { $0.seasonName == "Autumn" }!
+            case 3:
+                selectedSeason = seasons.first { $0.seasonName == "Summer" }!
+            case 4:
+                selectedSeason = seasons.first { $0.seasonName == "Winter" }!
+            default:
+                selectedSeason = nil
+            }
+    
+                // Create a new variable to store the instance of PlayerTableViewController
+                let destinationVC = segue.destination as! AnalysisResultViewController
+                destinationVC.season = selectedSeason
+            }
+        }
     
     func getDocumentsDirectory() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

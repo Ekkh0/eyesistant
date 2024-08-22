@@ -9,11 +9,13 @@ import UIKit
 
 class AnalysisResultViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
-    var season: Season?
+    var season = Season(seasonName: "", seasonImage: "", seasonCharacter: "", seasonDescription: "", seasonColors: [], backgroundColor: .clear)
     
     @IBOutlet weak var undertoneLabel: UILabel!
     @IBOutlet weak var characterLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var stackText: UIStackView!
+    @IBOutlet weak var colorStackView: UIStackView!
     
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
@@ -23,6 +25,9 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
     @IBOutlet weak var imageView6: UIImageView!
     @IBOutlet weak var imageView7: UIImageView!
     @IBOutlet weak var imageView8: UIImageView!
+    @IBOutlet weak var curvedBackground: UIImageView!
+    
+    var seasonBanner: UIImageView!
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
@@ -30,7 +35,7 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = season?.backgroundColor
+        self.view.backgroundColor = season.backgroundColor
         
         backButton.layer.cornerRadius = backButton.frame.size.width / 2
         backButton.layer.masksToBounds = true
@@ -38,21 +43,14 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         backButton.layer.shadowOffset = CGSizeMake(0.2, 0.2)
         backButton.layer.shadowOpacity = 0.5
         backButton.layer.shadowRadius = 0.0
-
-
         
-        undertoneLabel.text = season?.seasonName
+        undertoneLabel.text = season.seasonName
         
-        characterLabel.text = season?.seasonCharacter
+        characterLabel.text = season.seasonCharacter
         
-        descriptionLabel.text = season?.seasonDescription
+        descriptionLabel.text = season.seasonDescription
         
         let imageViews = [imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8]
-        
-        guard let season = season else {
-            print("Error: season is nil.")
-            return
-        }
 
         let colors: [UIColor] = season.seasonColors
 
@@ -83,6 +81,15 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         buttonConfiguration?.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 100, bottom: 16, trailing: 100)
         buttonConfiguration?.cornerStyle = .large
         startButton.configuration = buttonConfiguration
+        
+        let seasonImage = UIImage(named: season.seasonImage)
+        seasonBanner = UIImageView(image: seasonImage)
+        seasonBanner.frame = CGRect(x: 0, y: curvedBackground.bounds.minX+50, width: view.frame.width, height: 300)
+        view.insertSubview(seasonBanner, at: 1)
+        curvedBackground.layer.zPosition = 2
+        stackText.layer.zPosition = 3
+        startButton.layer.zPosition = 3
+        colorStackView.layer.zPosition = 3
     }
     
     // Property to hold a reference to the current popover view
@@ -143,7 +150,6 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         currentPopoverView = nil
     }
 
-
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         guard let imageView = gestureRecognizer.view as? UIImageView else { return }
         
@@ -159,10 +165,12 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         }
     }
 
-
+    @IBAction func goToMain(_ sender:UIButton){
+        performSegue(withIdentifier: "goToMain", sender: self)
+    }
     
-    @IBAction func backToMain(_ sender:UIButton){
-        performSegue(withIdentifier: "backToMain", sender: self)
+    @IBAction func goBackToDetector(_ sender:UIButton){
+        performSegue(withIdentifier: "goBackToDetector", sender: self)
     }
 
 }

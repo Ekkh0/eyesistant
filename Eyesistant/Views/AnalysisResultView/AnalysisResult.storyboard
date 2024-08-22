@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,9 +24,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CurvedTop" translatesAutoresizingMaskIntoConstraints="NO" id="zv0-R4-jBD">
-                                <rect key="frame" x="0.0" y="220" width="393" height="632"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CurvedTop" translatesAutoresizingMaskIntoConstraints="NO" id="zv0-R4-jBD">
+                                <rect key="frame" x="0.0" y="221" width="393" height="631"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="JgW-Uo-yw4">
                                 <rect key="frame" x="46.666666666666657" y="259" width="300" height="244.66666666666663"/>
@@ -141,7 +140,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="XLL-XX-BKI" firstAttribute="top" secondItem="QjY-G3-vOy" secondAttribute="top" constant="58" id="QfQ-pM-rYj"/>
-                                    <constraint firstAttribute="bottom" secondItem="XLL-XX-BKI" secondAttribute="bottom" constant="20" symbolic="YES" id="YcK-Wh-ZsA"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXC-ig-6we">
@@ -150,6 +148,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Let's Get Started">
                                     <fontDescription key="titleFontDescription" name="Outfit-Regular" family="Outfit" pointSize="17"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="goToMain:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oAx-2K-Jek"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23e-tT-voN">
                                 <rect key="frame" x="17" y="60" width="50" height="50"/>
@@ -160,7 +161,7 @@
                                     <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="backToMain:" destination="Y6W-OH-hqX" eventType="touchDown" id="sEQ-ET-hi5"/>
+                                    <action selector="goBackToDetector:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KUV-ej-ClK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -169,7 +170,9 @@
                         <constraints>
                             <constraint firstItem="QjY-G3-vOy" firstAttribute="top" secondItem="JgW-Uo-yw4" secondAttribute="bottom" constant="55.333333333333485" id="1tz-Cq-iBY"/>
                             <constraint firstItem="QjY-G3-vOy" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="LCJ-c8-Z8k"/>
+                            <constraint firstItem="zv0-R4-jBD" firstAttribute="centerX" secondItem="cXC-ig-6we" secondAttribute="centerX" id="Pzc-9d-hWE"/>
                             <constraint firstItem="QjY-G3-vOy" firstAttribute="centerX" secondItem="JgW-Uo-yw4" secondAttribute="centerX" id="XOP-Us-anD"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="zv0-R4-jBD" secondAttribute="bottom" constant="-34" id="jNv-GM-e45"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="cXC-ig-6we" secondAttribute="bottom" constant="40" id="kFe-yV-gT0"/>
                             <constraint firstItem="QjY-G3-vOy" firstAttribute="centerX" secondItem="cXC-ig-6we" secondAttribute="centerX" id="u8o-Nv-2tl"/>
                             <constraint firstItem="QjY-G3-vOy" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="559" id="w7v-Gx-EsZ"/>
@@ -178,6 +181,8 @@
                     <connections>
                         <outlet property="backButton" destination="23e-tT-voN" id="dfo-cg-Vy1"/>
                         <outlet property="characterLabel" destination="RQD-eS-wae" id="wYn-gF-7P5"/>
+                        <outlet property="colorStackView" destination="QjY-G3-vOy" id="a0m-FI-eFr"/>
+                        <outlet property="curvedBackground" destination="zv0-R4-jBD" id="42x-bC-GNO"/>
                         <outlet property="descriptionLabel" destination="Q5M-8O-gJG" id="oSL-oY-eoY"/>
                         <outlet property="imageView1" destination="iHm-Cu-XGO" id="rSP-dI-Qcr"/>
                         <outlet property="imageView2" destination="wDH-5V-QZ6" id="doS-oU-Pw8"/>
@@ -187,22 +192,32 @@
                         <outlet property="imageView6" destination="Jbq-Um-VfW" id="nyE-kG-Cgv"/>
                         <outlet property="imageView7" destination="muX-XM-Kux" id="PHf-J9-o6G"/>
                         <outlet property="imageView8" destination="ly5-lj-xZg" id="HiZ-k2-DWd"/>
+                        <outlet property="stackText" destination="JgW-Uo-yw4" id="sqO-az-6kd"/>
                         <outlet property="startButton" destination="cXC-ig-6we" id="l19-3Q-hvj"/>
                         <outlet property="undertoneLabel" destination="C9U-Zh-B3W" id="NGW-jc-HGs"/>
-                        <segue destination="mgL-GO-xFw" kind="presentation" identifier="backToMain" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="tXW-af-XxC"/>
+                        <segue destination="mgL-GO-xFw" kind="presentation" identifier="goToMain" modalPresentationStyle="fullScreen" id="tXW-af-XxC"/>
+                        <segue destination="017-of-yxZ" kind="presentation" identifier="goBackToDetector" modalPresentationStyle="fullScreen" id="fcM-Lt-XPj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
         </scene>
-        <!--ViewController-->
+        <!--MainViewController-->
         <scene sceneID="cWp-kQ-ILR">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ViewController" id="mgL-GO-xFw" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="MainView" storyboardName="MainView" referencedIdentifier="MainViewController" id="mgL-GO-xFw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xuo-mj-AL9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="737" y="4"/>
+        </scene>
+        <!--SkinToneDetectorViewController-->
+        <scene sceneID="c4A-Bt-4qk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SkinToneDetector" referencedIdentifier="SkinToneDetectorViewController" id="017-of-yxZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JVs-bM-ohg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="797" y="-50"/>
         </scene>
     </scenes>
     <resources>
