@@ -18,10 +18,23 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <segue destination="i0O-kl-YS7" kind="presentation" identifier="goToResult" modalPresentationStyle="fullScreen" id="zee-eI-MVE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="15" y="-2"/>
+        </scene>
+        <!--AnalysisResultViewController-->
+        <scene sceneID="qsN-00-fw3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnalysisResult" referencedIdentifier="AnalysisResultViewController" id="i0O-kl-YS7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="9v8-8F-aG9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tSY-GJ-T4t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="629" y="-2"/>
         </scene>
     </scenes>
     <resources>

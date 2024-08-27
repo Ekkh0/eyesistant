@@ -17,6 +17,7 @@ class TutorialPageViewController: UIViewController {
         buttonConfiguration?.cornerStyle = .capsule
         startButton.configuration = buttonConfiguration
     }
+    
     @IBAction func nextPage(_ sender:UIButton){
         performSegue(withIdentifier: "nextPage", sender: self)
     }

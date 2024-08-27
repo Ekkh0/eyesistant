@@ -15,6 +15,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     let context = CIContext()
     var videoOutput: AVCaptureVideoDataOutput!
     var imageView: UIImageView!
+    var sheetVC: SheetViewController!
     var currentCamera: AVCaptureDevice.Position = .back {
         didSet{
             if currentCamera == .front{
@@ -68,6 +69,67 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         flipButton.backgroundColor = .blue
         flipButton.addTarget(self, action: #selector(flipCamera), for: .touchUpInside)
         view.insertSubview(flipButton, at: 2)
+        
+        let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
+        var person = UIImage(systemName: "person", withConfiguration: boldConfig)
+        person = person?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let personView = UIImageView(image: person)
+        personView.frame = CGRect(x: self.view.frame.maxX-80, y: 80, width: 30, height: 30)
+        personView.contentMode = .scaleAspectFit
+        personView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToResult))
+        personView.addGestureRecognizer(gestureRecognizer)
+        view.addSubview(personView)
+        
+        var menuButton = UIImage(systemName: "line.3.horizontal.decrease.circle.fill", withConfiguration: boldConfig)
+        menuButton = menuButton?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let menuButtonView = UIImageView(image: menuButton)
+        menuButtonView.frame = CGRect(x: self.view.frame.maxX-80, y: self.view.frame.maxY-80, width: 30, height: 30)
+        menuButtonView.contentMode = .scaleAspectFit
+        menuButtonView.isUserInteractionEnabled = true
+        let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bringUpColor))
+        menuButtonView.addGestureRecognizer(menuGestureRecognizer)
+        view.addSubview(menuButtonView)
+    }
+    
+    @objc func bringUpColor(){
+        showColorPicker()
+    }
+    
+    @objc func navigateToResult(){
+        if let sheetVC = sheetVC {
+                    sheetVC.dismiss(animated: true, completion: {
+                        self.sheetVC = nil // Clear the reference after dismissal
+                    })
+                }
+        
+        performSegue(withIdentifier: "goToResult", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult"{
+            var selectedSeason: Season!
+            let seasons = SeasonSeeder.seed()
+        let skinTone = UserDefaults.standard.integer(forKey: "skinTone")
+        switch skinTone{
+        case 1:
+            selectedSeason = seasons.first { $0.seasonName == "Spring" }!
+        case 2:
+            selectedSeason = seasons.first { $0.seasonName == "Autumn" }!
+        case 3:
+            selectedSeason = seasons.first { $0.seasonName == "Summer" }!
+        case 4:
+            selectedSeason = seasons.first { $0.seasonName == "Winter" }!
+        default:
+            selectedSeason = nil
+        }
+
+            // Create a new variable to store the instance of PlayerTableViewController
+            let destinationVC = segue.destination as! AnalysisResultViewController
+            print (skinTone)
+            destinationVC.season = selectedSeason
+            destinationVC.viewState = 1
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,7 +143,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     @objc func showColorPicker() {
-        let sheetVC = SheetViewController()
+        sheetVC = SheetViewController()
         sheetVC.suggestedColor = skinTone!.colorHexes
         sheetVC.suggestedColorDescription = skinTone!.colorDesc
         sheetVC.suggestedColorName = skinTone!.colortitle
@@ -107,8 +169,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         var sweater = UIImage(named: "Sweater")
         sweater = sweater?.tintPhoto(selectedColor)
         sweaterImage = UIImageView(image: sweater)
-        sweaterImage.frame = CGRect(x: 0, y: self.view.frame.midY/3*2, width: self.view.frame.width, height: self.view.frame.height)
-        sweaterImage.contentMode = .bottom
+        sweaterImage.frame = CGRect(x: self.view.frame.midX-self.view.frame.width*1.125, y: self.view.frame.midY*1.5 - self.view.frame.height, width: self.view.frame.width*2.25, height: self.view.frame.height*2.25)
+        sweaterImage.contentMode = .scaleAspectFit
         sweaterImage.translatesAutoresizingMaskIntoConstraints = false
         self.view.insertSubview(sweaterImage, at: 1)
     }
@@ -163,8 +225,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }else{
             if let cgImage = context.createCGImage(ciImage, from: ciImage.extent) {
                 let uiImage = UIImage(cgImage: cgImage)
+                let finalImage = UIImage(cgImage: uiImage.cgImage!, scale: uiImage.scale, orientation: .upMirrored)
                 DispatchQueue.main.async {
-                    self.imageView.image = uiImage
+                    self.imageView.image = finalImage
                 }
             }
         }

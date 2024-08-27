@@ -17,7 +17,6 @@
 		1A2722BA2C7720C200B9C3E9 /* TutorialPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2722B92C7720C200B9C3E9 /* TutorialPage.storyboard */; };
 		5F8A62592C732894007B171A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62582C732894007B171A /* AppDelegate.swift */; };
 		5F8A625B2C732894007B171A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A625A2C732894007B171A /* SceneDelegate.swift */; };
-		5F8A625D2C732894007B171A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A625C2C732894007B171A /* OnboardingViewController.swift */; };
 		5F8A62622C732895007B171A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A62612C732895007B171A /* Assets.xcassets */; };
 		5F8A62652C732895007B171A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A62642C732895007B171A /* Base */; };
 		5F8A62722C732F64007B171A /* SkinToneDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62712C732F64007B171A /* SkinToneDetection.swift */; };
@@ -31,7 +30,6 @@
 		5F8A62862C76C8AF007B171A /* ColorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62852C76C8AF007B171A /* ColorSheet.swift */; };
 		5F8A62882C76CAFC007B171A /* Sheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A62872C76CAFC007B171A /* Sheet.storyboard */; };
 		5F8A628A2C76F75A007B171A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8A62892C76F75A007B171A /* MainViewModel.swift */; };
-		5F8A628C2C7725AB007B171A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F8A628B2C7725AB007B171A /* Onboarding.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +44,6 @@
 		5F8A62552C732894007B171A /* Eyesistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eyesistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F8A62582C732894007B171A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F8A625A2C732894007B171A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5F8A625C2C732894007B171A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		5F8A62612C732895007B171A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F8A62642C732895007B171A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F8A62662C732895007B171A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,7 +58,6 @@
 		5F8A62852C76C8AF007B171A /* ColorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSheet.swift; sourceTree = "<group>"; };
 		5F8A62872C76CAFC007B171A /* Sheet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sheet.storyboard; sourceTree = "<group>"; };
 		5F8A62892C76F75A007B171A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		5F8A628B2C7725AB007B171A /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,12 +135,9 @@
 			isa = PBXGroup;
 			children = (
 				1A2722B62C77205F00B9C3E9 /* TutorialPage */,
-				1A2722AC2C763ADF00B9C3E9 /* AnalysisResultView */,
 				5F8A627E2C762881007B171A /* MainView */,
 				5F8A62732C7335F0007B171A /* SkinToneDetectorView */,
 				1A2722AC2C763ADF00B9C3E9 /* AnalysisResultView */,
-				5F8A625C2C732894007B171A /* OnboardingViewController.swift */,
-				5F8A628B2C7725AB007B171A /* Onboarding.storyboard */,
 				5F8A62702C732939007B171A /* Components */,
 			);
 			path = Views;
@@ -269,7 +262,6 @@
 				5F8A62772C73360B007B171A /* SkinToneDetector.storyboard in Resources */,
 				5F8A62882C76CAFC007B171A /* Sheet.storyboard in Resources */,
 				5F8A62822C7628A4007B171A /* MainView.storyboard in Resources */,
-				5F8A628C2C7725AB007B171A /* Onboarding.storyboard in Resources */,
 				1A2722BA2C7720C200B9C3E9 /* TutorialPage.storyboard in Resources */,
 				5F8A62652C732895007B171A /* Base in Resources */,
 				1A2722B02C763BA300B9C3E9 /* AnalysisResult.storyboard in Resources */,
@@ -285,7 +277,6 @@
 			files = (
 				5F8A62722C732F64007B171A /* SkinToneDetection.swift in Sources */,
 				1A2722AE2C763B2C00B9C3E9 /* AnalysisResultViewController.swift in Sources */,
-				5F8A625D2C732894007B171A /* OnboardingViewController.swift in Sources */,
 				5F8A62592C732894007B171A /* AppDelegate.swift in Sources */,
 				1A2722AB2C763AB700B9C3E9 /* Seasons.swift in Sources */,
 				5F8A62752C733602007B171A /* SkinToneDetectorView.swift in Sources */,
@@ -367,7 +358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -424,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -447,7 +438,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Onboarding;
+				INFOPLIST_KEY_UIMainStoryboardFile = TutorialPage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,9 +447,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MiniChallenge3.Eyesistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -475,7 +470,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Onboarding;
+				INFOPLIST_KEY_UIMainStoryboardFile = TutorialPage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,9 +479,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MiniChallenge3.Eyesistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -68,7 +68,7 @@ class SkinToneDetection: ObservableObject {
             print(hsv.s)
             print(color.redValue, color.greenValue, color.blueValue)
             print(ryb)
-            if ryb.rybYellow == max(ryb.rybBlue, ryb.rybRed, ryb.rybYellow) || (ryb.rybYellow-15...ryb.rybYellow+15 ~= color.redValue*255 && ryb.rybBlue != max(ryb.rybBlue, ryb.rybRed, ryb.rybYellow)){
+            if ryb.rybYellow == max(ryb.rybBlue, ryb.rybRed, ryb.rybYellow) || (ryb.rybYellow-5...ryb.rybYellow+5 ~= color.redValue*255 && ryb.rybBlue != max(ryb.rybBlue, ryb.rybRed, ryb.rybYellow)){
                 if hsv.s > 0.2{
                     return 1
                 }else {

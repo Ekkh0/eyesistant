@@ -10,6 +10,7 @@ import UIKit
 class AnalysisResultViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     var season = Season(seasonName: "", seasonImage: "", seasonCharacter: "", seasonDescription: "", seasonColors: [], backgroundColor: .clear)
+    var viewState = Int()
     
     @IBOutlet weak var undertoneLabel: UILabel!
     @IBOutlet weak var characterLabel: UILabel!
@@ -37,6 +38,11 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         
         self.view.backgroundColor = season.backgroundColor
         
+        if viewState == 0 {
+            backButton.addTarget(self, action: #selector(goBackToDetector), for: .touchUpInside)
+        }else{
+            backButton.addTarget(self, action: #selector(goToMain), for: .touchUpInside)
+        }
         backButton.layer.cornerRadius = backButton.frame.size.width / 2
         backButton.layer.masksToBounds = true
         backButton.layer.shadowColor = UIColor.black.cgColor
@@ -80,7 +86,26 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         var buttonConfiguration = startButton.configuration
         buttonConfiguration?.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 100, bottom: 16, trailing: 100)
         buttonConfiguration?.cornerStyle = .large
+        NSLayoutConstraint.activate([
+            startButton.widthAnchor.constraint(equalToConstant: 337),
+            startButton.heightAnchor.constraint(equalToConstant: 56)
+        ])
         startButton.configuration = buttonConfiguration
+        if viewState == 0 {
+            startButton.backgroundColor = .buttonBlue
+            startButton.setTitleColor(.white, for: .normal)
+            startButton.layer.cornerRadius = 14
+            startButton.addTarget(self, action: #selector(goToMain), for: .touchUpInside)
+        }else{
+            startButton.setTitle("Retake The Test", for: .normal)
+            startButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
+            startButton.setTitleColor(.buttonBlue, for: .normal)
+            startButton.backgroundColor = .white
+            startButton.layer.borderColor = CGColor(red: 0, green: 0, blue: 1, alpha: 1)
+            startButton.layer.borderWidth = 2
+            startButton.layer.cornerRadius = 14
+            startButton.addTarget(self, action: #selector(goBackToDetector), for: .touchUpInside)
+        }
         
         let seasonImage = UIImage(named: season.seasonImage)
         seasonBanner = UIImageView(image: seasonImage)
@@ -165,12 +190,11 @@ class AnalysisResultViewController: UIViewController, UIPopoverPresentationContr
         }
     }
 
-    @IBAction func goToMain(_ sender:UIButton){
+    @objc func goToMain(){
         performSegue(withIdentifier: "goToMain", sender: self)
     }
     
-    @IBAction func goBackToDetector(_ sender:UIButton){
+    @objc func goBackToDetector(){
         performSegue(withIdentifier: "goBackToDetector", sender: self)
     }
-
 }

@@ -143,14 +143,10 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXC-ig-6we">
-                                <rect key="frame" x="121.00000000000001" y="742.33333333333337" width="151.33333333333337" height="35.666666666666629"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Let's Get Started">
-                                    <fontDescription key="titleFontDescription" name="Outfit-Regular" family="Outfit" pointSize="17"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="goToMain:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oAx-2K-Jek"/>
-                                </connections>
+                                <rect key="frame" x="129" y="743" width="135" height="35"/>
+                                <fontDescription key="fontDescription" name="Outfit-Regular" family="Outfit" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Let's Get Started"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23e-tT-voN">
                                 <rect key="frame" x="17" y="60" width="50" height="50"/>
@@ -160,9 +156,6 @@
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
-                                <connections>
-                                    <action selector="goBackToDetector:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KUV-ej-ClK"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses camera to determine your skintone category and also helps in finding colors in the real world through selective color filtering.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Outfit-Bold</string>
@@ -21,7 +23,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>Onboarding</string>
+					<string>TutorialPage</string>
 				</dict>
 			</array>
 		</dict>

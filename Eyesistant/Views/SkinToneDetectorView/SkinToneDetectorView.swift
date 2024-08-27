@@ -23,6 +23,7 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
     var notice: UIStackView!
     var captureButton: UIImageView!
     var proceedButtons: UIStackView!
+    var currentCamera: AVCaptureDevice.Position = .front
     var noticeType: [Int] = [] {
         didSet{
             if overlayHint.isHidden{
@@ -74,11 +75,11 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
     override func viewDidLoad() {
         super.viewDidLoad()
         UserDefaults.standard.removeObject(forKey: "personalColor")
-//         Set up the capture session
+        //         Set up the capture session
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .hd4K3840x2160
         
-        setupCamera(position: .back)
+        setupCamera(position: currentCamera)
         
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         videoPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -192,6 +193,22 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
             button.widthAnchor.constraint(equalToConstant: 150), // Adjust as needed
             button.heightAnchor.constraint(equalToConstant: 50)  // Adjust as needed
         ])
+        
+//        let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
+//        var flipCam = UIImage(systemName: "camera.rotate.fill", withConfiguration: boldConfig)
+//        flipCam = flipCam?.withTintColor(.white, renderingMode: .alwaysOriginal)
+//        let flipCamView = UIImageView(image: flipCam)
+//        flipCamView.frame = CGRect(x: self.view.frame.maxX-80, y: 80, width: 30, height: 30)
+//        flipCamView.contentMode = .scaleAspectFit
+//        flipCamView.isUserInteractionEnabled = true
+//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(flipCamera))
+//        flipCamView.addGestureRecognizer(gestureRecognizer)
+//        view.addSubview(flipCamView)
+    }
+    
+    @objc func flipCamera() {
+        currentCamera = (currentCamera == .back) ? .front : .back
+        setupCamera(position: currentCamera)
     }
     
     @objc func removeHint(){
@@ -247,15 +264,14 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         }
         defaults.set(relativePath, forKey: "userImagePath")
         defaults.synchronize()
-        
-        print(skinToneDetection.detectSkinTone(in: savedImage!))
+
         performSegue(withIdentifier: "goToResult", sender: self)
     }
     
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "goToResult"{
-                var selectedSeason: Season!
-                let seasons = SeasonSeeder.seed()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult"{
+            var selectedSeason: Season!
+            let seasons = SeasonSeeder.seed()
             switch skinToneDetection.detectSkinTone(in: savedImage!){
             case 1:
                 selectedSeason = seasons.first { $0.seasonName == "Spring" }!
@@ -268,12 +284,13 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
             default:
                 selectedSeason = nil
             }
-    
-                // Create a new variable to store the instance of PlayerTableViewController
-                let destinationVC = segue.destination as! AnalysisResultViewController
-                destinationVC.season = selectedSeason
-            }
+            
+            // Create a new variable to store the instance of PlayerTableViewController
+            let destinationVC = segue.destination as! AnalysisResultViewController
+            destinationVC.season = selectedSeason
+            destinationVC.viewState = 0
         }
+    }
     
     func getDocumentsDirectory() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -444,7 +461,6 @@ class SkinToneDetectorViewController: UIViewController, AVCaptureVideoDataOutput
         
         captureSession.commitConfiguration()
     }
-    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
