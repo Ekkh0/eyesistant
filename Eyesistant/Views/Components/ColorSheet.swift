@@ -103,7 +103,7 @@ class SheetViewController: UIViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -111,7 +111,7 @@ class SheetViewController: UIViewController {
     
     private let hexLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -119,7 +119,7 @@ class SheetViewController: UIViewController {
     
     private let rgbLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
         label.textColor = .black
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +128,7 @@ class SheetViewController: UIViewController {
     
     private let colorDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
         label.textColor = .darkGray
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
