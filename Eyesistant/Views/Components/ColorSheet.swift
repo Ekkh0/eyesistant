@@ -9,12 +9,14 @@ import UIKit
 
 struct ColorModel: Codable{
     let color: String
+    let rgb: String
     var description: String
     var colorName: String
     var isFavorite: Bool
     
-    init(color: String, description: String, colorName: String, isFavorite: Bool = false) {
+    init(color: String, rgb: String, description: String, colorName: String, isFavorite: Bool) {
         self.color = color
+        self.rgb = rgb
         self.description = description
         self.colorName = colorName
         self.isFavorite = isFavorite
@@ -34,6 +36,20 @@ class SheetViewController: UIViewController {
         cv.backgroundColor = .clear
         return cv
     }()
+    
+    private var selectedColor: ColorModel? {
+        didSet {
+            updateDescriptionLabel()
+            updateColorNameTitleLabel()
+        }
+    }
+    
+    private func updateColorNameTitleLabel() {
+        guard let selectedColor = selectedColor else {
+            hexLabel.text = nil
+            return
+        }
+    }
     
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -62,6 +78,65 @@ class SheetViewController: UIViewController {
         return xButton
     }()
     
+    private let colorDescriptionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let dividerBottom: UIView = {
+        let divider = UIView()
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.backgroundColor = .lightGray
+        return divider
+    }()
+    
+    private let descriptionTitleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "COLOR DESCRIPTION"
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.textColor = .gray
+        titleLabel.textAlignment = .left
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return titleLabel
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let hexLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let rgbLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .black
+        label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let colorDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .darkGray
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var selectedIndexPath: IndexPath?
     var suggestedColor: [UIColor] = []
     var suggestedColorDescription: [String] = []
     var suggestedColorName: [String] = []
@@ -99,7 +174,7 @@ class SheetViewController: UIViewController {
         
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 50),
             collectionView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: xButton.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
@@ -107,6 +182,43 @@ class SheetViewController: UIViewController {
         
         // Set the initial layout to horizontal
         myCollectionViewFlowLayout.updateLayoutForOtherDetents()
+        
+        view.addSubview(dividerBottom)
+        
+        colorDescriptionView.isHidden = true
+        descriptionTitleLabel.isHidden = true
+        nameLabel.isHidden = true
+        hexLabel.isHidden = true
+        rgbLabel.isHidden = true
+        colorDescriptionLabel.isHidden = true
+        dividerBottom.isHidden = true
+        
+        setupColorDescriptionView()
+        
+        updateDescriptionLabel()
+        
+        myCollectionViewFlowLayout.updateLayoutForOtherDetents()
+    }
+    
+    private func updateDescriptionLabel() {
+        guard let selectedColor = selectedColor else {
+            nameLabel.text = "No Color Selected"
+            hexLabel.text = nil
+            colorDescriptionLabel.text = "Please select a color from the collection."
+            return
+        }
+        nameLabel.text = selectedColor.colorName
+        hexLabel.text = "HEX: \(selectedColor.color) | RGB: \(selectedColor.rgb)"
+        colorDescriptionLabel.text = selectedColor.description
+    }
+    
+    private func setupColorDescriptionView() {
+        view.addSubview(colorDescriptionView)
+        colorDescriptionView.addSubview(descriptionTitleLabel)
+        colorDescriptionView.addSubview(nameLabel)
+        colorDescriptionView.addSubview(hexLabel)
+        colorDescriptionView.addSubview(rgbLabel)
+        colorDescriptionView.addSubview(colorDescriptionLabel)
     }
     
     func populateColors(){
@@ -119,7 +231,7 @@ class SheetViewController: UIViewController {
             }
         }else{
             for (idx, _) in suggestedColor.enumerated(){
-                colors.append(ColorModel.init(color: hexStringFromColor(color: suggestedColor[idx]), description: suggestedColorDescription[idx], colorName: suggestedColorName[idx]))
+                colors.append(ColorModel.init(color: hexStringFromColor(color: suggestedColor[idx]), rgb: rgbStringFromColor(color: suggestedColor[idx]), description: suggestedColorDescription[idx], colorName: suggestedColorName[idx], isFavorite: false))
             }
         }
     }
@@ -132,6 +244,16 @@ class SheetViewController: UIViewController {
 
         let hexString = String.init(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
         return hexString
+     }
+    
+    func rgbStringFromColor(color: UIColor) -> String {
+        let components = color.cgColor.components
+        let r: CGFloat = components?[0] ?? 0.0
+        let g: CGFloat = components?[1] ?? 0.0
+        let b: CGFloat = components?[2] ?? 0.0
+
+        let rgbString = String(format: "(%d, %d, %d)", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+        return rgbString
      }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -295,6 +417,32 @@ extension SheetViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let colorModel = colors[indexPath.row]
+        selectedColor = colorModel
+        
+        for cell in collectionView.visibleCells {
+                cell.layer.borderColor = UIColor.clear.cgColor
+                cell.layer.borderWidth = 0
+            }
+        
+        if let previousIndexPath = selectedIndexPath, previousIndexPath != indexPath {
+            if let previousCell = collectionView.cellForItem(at: previousIndexPath) {
+                previousCell.layer.borderColor = UIColor.clear.cgColor
+                previousCell.layer.borderWidth = 0
+            }
+        }
+        
+        if let selectedCell = collectionView.cellForItem(at: indexPath) {
+            if detentState != 0{
+                selectedIndexPath = indexPath
+                selectedCell.layer.borderColor = UIColor.lightGray.cgColor
+                selectedCell.layer.borderWidth = 3.0
+            }
+        }
+        selectedIndexPath = indexPath
+    }
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         guard let selectedDetentIdentifier = sheetPresentationController.selectedDetentIdentifier else { return }
         
@@ -330,13 +478,14 @@ extension SheetViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     
     private func updateCollectionViewConstraints(for detentIdentifier: UISheetPresentationController.Detent.Identifier) {
-        var bottomConstant: CGFloat = 50 // Default value
-        var topConstant: CGFloat = 15 // Default value
-        
-//        if detentIdentifier == .large {
-//            bottomConstant = 300 // Adjusted value for large detent
-//            topConstant = 30 // Additional spacing for large detent
-//        }
+        var bottomConstant: CGFloat = 50
+        var topConstant: CGFloat = 15
+        colorDescriptionView.isHidden = true
+        descriptionTitleLabel.isHidden = true
+        nameLabel.isHidden = true
+        hexLabel.isHidden = true
+        colorDescriptionLabel.isHidden = true
+        dividerBottom.isHidden = true
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topConstant),
@@ -347,12 +496,70 @@ extension SheetViewController: UICollectionViewDelegate, UICollectionViewDataSou
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             collectionView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: xButton.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottomConstant)
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottomConstant),
         ])
+        
+        if detentIdentifier == .large {
+            bottomConstant = 329
+            topConstant = 30
+            colorDescriptionView.isHidden = false
+            descriptionTitleLabel.isHidden = false
+            nameLabel.isHidden = false
+            hexLabel.isHidden = false
+            rgbLabel.isHidden = false
+            colorDescriptionLabel.isHidden = false
+            dividerBottom.isHidden = false
+            
+            NSLayoutConstraint.activate([
+                titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topConstant),
+                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+                titleLabel.heightAnchor.constraint(equalToConstant: 35),
+                titleLabel.widthAnchor.constraint(equalToConstant: 200),
+                
+                collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+                collectionView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: xButton.trailingAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottomConstant),
+                
+                dividerBottom.heightAnchor.constraint(equalToConstant: 1),
+                dividerBottom.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+                dividerBottom.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+                dividerBottom.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 15),
+                
+                colorDescriptionView.leadingAnchor.constraint(equalTo: dividerBottom.leadingAnchor),
+                colorDescriptionView.trailingAnchor.constraint(equalTo: dividerBottom.trailingAnchor),
+                colorDescriptionView.topAnchor.constraint(equalTo: dividerBottom.bottomAnchor, constant: 15),
+                colorDescriptionView.heightAnchor.constraint(equalToConstant: 200),
+                
+                descriptionTitleLabel.topAnchor.constraint(equalTo: colorDescriptionView.topAnchor, constant: 15),
+                descriptionTitleLabel.leadingAnchor.constraint(equalTo: colorDescriptionView.leadingAnchor),
+                descriptionTitleLabel.trailingAnchor.constraint(equalTo: colorDescriptionView.trailingAnchor),
+                descriptionTitleLabel.heightAnchor.constraint(equalToConstant: 30),
+                
+                nameLabel.leadingAnchor.constraint(equalTo: descriptionTitleLabel.leadingAnchor),
+                nameLabel.widthAnchor.constraint(equalToConstant: 300),
+                nameLabel.topAnchor.constraint(equalTo: descriptionTitleLabel.bottomAnchor, constant: 10),
+                nameLabel.heightAnchor.constraint(equalToConstant: 30),
+                
+                hexLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+                hexLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+                hexLabel.widthAnchor.constraint(equalToConstant: 400),
+                hexLabel.heightAnchor.constraint(equalToConstant: 20),
+                
+                rgbLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+                rgbLabel.leadingAnchor.constraint(equalTo: hexLabel.leadingAnchor, constant: 0),
+                rgbLabel.trailingAnchor.constraint(equalTo: colorDescriptionView.trailingAnchor),
+                hexLabel.heightAnchor.constraint(equalTo: hexLabel.heightAnchor),
+                
+                colorDescriptionLabel.topAnchor.constraint(equalTo: hexLabel.bottomAnchor, constant: 10),
+                colorDescriptionLabel.leadingAnchor.constraint(equalTo: hexLabel.leadingAnchor),
+                colorDescriptionLabel.trailingAnchor.constraint(equalTo: rgbLabel.trailingAnchor),
+                hexLabel.heightAnchor.constraint(equalToConstant: 200),
+            ])
+        }
         
         view.layoutIfNeeded()
     }
-    
     
     
 }
